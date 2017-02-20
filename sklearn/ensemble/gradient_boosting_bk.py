@@ -995,8 +995,6 @@ class BaseGradientBoosting(six.with_metaclass(ABCMeta, BaseEnsemble)):
 
             # init predictions
             y_pred = self.init_.predict(X)
-            if len(np.shape(y_pred)) == 1:
-                y_pred = np.reshape(y_pred,(-1,1))
             begin_at_stage = 0
         else:
             # add more estimators to fitted model
@@ -1126,8 +1124,6 @@ class BaseGradientBoosting(six.with_metaclass(ABCMeta, BaseEnsemble)):
         # for use in inner loop, not raveling the output in single-class case,
         # not doing input validation.
         score = self._init_decision_function(X)
-        if len(np.shape(score)) == 1:
-            score = np.reshape(score, (-1,1))
         predict_stages(self.estimators_, X, self.learning_rate, score)
         return score
 
